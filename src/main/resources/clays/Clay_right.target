@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<target defaultPerceivedWidth="110" defaultPerceivedHeight="69" defaultDistance="5000">
+	<image x="41.000000" y="32.000000" file="@clays/claybird_right.gif">
+		<tag name="command" value="animate" />
+	</image>
+</target>

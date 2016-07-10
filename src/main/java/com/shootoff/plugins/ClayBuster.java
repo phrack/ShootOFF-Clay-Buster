@@ -21,7 +21,7 @@ import javafx.geometry.Point2D;
 import javafx.scene.transform.Rotate;
 
 public class ClayBuster extends ProjectorTrainingExerciseBase implements TrainingExercise {
-	private static final int CLAY_LAUNCH_DELAY = 3; /* seconds */
+	private static final int CLAY_LAUNCH_DELAY = 7; /* seconds */
 	private static final String SHOTGUN_RANGE_BACKGROUND = "background/shotgun_range.gif";
 	private static final int BACKGROUND_WIDTH = 1920;
 	private static final int BACKGROUND_HEIGHT = 1436;

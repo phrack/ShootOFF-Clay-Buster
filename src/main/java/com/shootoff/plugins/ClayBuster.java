@@ -23,10 +23,10 @@ import javafx.scene.transform.Rotate;
 public class ClayBuster extends ProjectorTrainingExerciseBase implements TrainingExercise {
 	private static final int CLAY_LAUNCH_DELAY = 3; /* seconds */
 	private static final String SHOTGUN_RANGE_BACKGROUND = "background/shotgun_range.gif";
-	private static final int BACKGROUND_WIDTH = 1024;
-	private static final int BACKGROUND_HEIGHT = 768;
-	private static final int UNSCALED_BUNKER_X = 450;
-	private static final int UNSCALED_BUNKER_Y = 255;
+	private static final int BACKGROUND_WIDTH = 1920;
+	private static final int BACKGROUND_HEIGHT = 1436;
+	private static final int UNSCALED_BUNKER_X = 750;
+	private static final int UNSCALED_BUNKER_Y = 560;
 
 	private static ProjectorTrainingExerciseBase thisSuper;
 
@@ -42,7 +42,8 @@ public class ClayBuster extends ProjectorTrainingExerciseBase implements Trainin
 	private ScheduledExecutorService executorService = Executors.newScheduledThreadPool(CORE_POOL_SIZE,
 			new NamedThreadFactory("ClayBusterExercise"));
 
-	public ClayBuster() {}
+	public ClayBuster() {
+	}
 
 	public ClayBuster(List<Target> targets) {
 		super(targets);
@@ -171,24 +172,26 @@ public class ClayBuster extends ProjectorTrainingExerciseBase implements Trainin
 			} else {
 				angle -= 1;
 			}
-			
+
 			Point2D p = target.getPosition();
-			
+
 			Rotate r = new Rotate(angle, p.getX(), p.getY());
 			Point2D rotatedPoint = r.transform(p.getX() + dx, p.getY() - dy);
-			
+
 			target.setPosition(rotatedPoint.getX(), rotatedPoint.getY());
 
 			if (thisSuper.isPerspectiveInitialized()) {
-				targetDistance += dy;
+				targetDistance += dy * 10;
 
 				thisSuper.setTargetDistance(target, defaultTargetWidth, defaultTargetHeight, targetDistance);
 			}
 
 			// Return false if went off screen or got too small
 			p = target.getPosition();
-
-			return p.getX() > 0 && p.getY() > 0 && target.getDimension().getWidth() > MIN_CLAY_WIDTH;
+			
+			return p.getX() + target.getDimension().getWidth() > 0 && p.getX() < thisSuper.getArenaWidth()
+					&& p.getY() + target.getDimension().getHeight() > 0
+					&& target.getDimension().getWidth() > MIN_CLAY_WIDTH;
 		}
 	}
 
@@ -240,6 +243,8 @@ public class ClayBuster extends ProjectorTrainingExerciseBase implements Trainin
 		visibleClays.clear();
 
 		super.showTextOnFeed("Broken Clays: 0\nMissed Clays: 0\nShots: 0");
+		
+		executorService.schedule(() -> launchClay(), CLAY_LAUNCH_DELAY, TimeUnit.SECONDS);
 	}
 
 	@Override

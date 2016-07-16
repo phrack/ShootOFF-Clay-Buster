@@ -71,6 +71,9 @@ public class ClayBuster extends ProjectorTrainingExerciseBase implements Trainin
 		executorService.schedule(() -> launchClay(), CLAY_LAUNCH_DELAY, TimeUnit.SECONDS);
 		executorService.schedule(() -> moveClays(), 100, TimeUnit.MILLISECONDS);
 	}
+	
+	@Override
+	public void targetUpdate(Target target, TargetChange change) { }
 
 	public void launchClay() {
 		visibleClays.add(new Clay(scaledBunkerX, scaledBunkerY));

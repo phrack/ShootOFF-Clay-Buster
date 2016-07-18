@@ -38,7 +38,7 @@ public class ClayBuster extends ProjectorTrainingExerciseBase implements Trainin
 	private int shots = 0;
 	private final Set<Clay> visibleClays = new HashSet<Clay>();
 
-	private static final int CORE_POOL_SIZE = 6;
+	private static final int CORE_POOL_SIZE = 8;
 	private ScheduledExecutorService executorService = Executors.newScheduledThreadPool(CORE_POOL_SIZE,
 			new NamedThreadFactory("ClayBusterExercise"));
 

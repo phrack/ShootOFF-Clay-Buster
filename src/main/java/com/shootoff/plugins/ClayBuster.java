@@ -72,10 +72,9 @@ public class ClayBuster extends ProjectorTrainingExerciseBase implements Trainin
 		executorService.schedule(() -> launchClay(), CLAY_LAUNCH_DELAY, TimeUnit.SECONDS);
 		executorService.schedule(() -> moveClays(), 100, TimeUnit.MILLISECONDS);
 	}
-
+	
 	@Override
-	public void targetUpdate(Target target, TargetChange change) {
-	}
+	public void targetUpdate(Target target, TargetChange change) { }
 
 	public void launchClay() {
 		visibleClays.add(new Clay(scaledBunkerX, scaledBunkerY));
@@ -173,9 +172,9 @@ public class ClayBuster extends ProjectorTrainingExerciseBase implements Trainin
 		 */
 		public boolean moveTarget() {
 			if (Direction.RIGHT.equals(direction)) {
-				angle += 1;
+				angle += 0.5;
 			} else {
-				angle -= 1;
+				angle -= 0.5;
 			}
 
 			Point2D p = target.getPosition();
@@ -193,7 +192,7 @@ public class ClayBuster extends ProjectorTrainingExerciseBase implements Trainin
 
 			// Return false if went off screen or got too small
 			p = target.getPosition();
-
+			
 			return p.getX() + target.getDimension().getWidth() > 0 && p.getX() < thisSuper.getArenaWidth()
 					&& p.getY() + target.getDimension().getHeight() > 0
 					&& target.getDimension().getWidth() > MIN_CLAY_WIDTH;
@@ -248,7 +247,7 @@ public class ClayBuster extends ProjectorTrainingExerciseBase implements Trainin
 		visibleClays.clear();
 
 		super.showTextOnFeed("Broken Clays: 0\nMissed Clays: 0\nShots: 0");
-
+		
 		executorService.schedule(() -> launchClay(), CLAY_LAUNCH_DELAY, TimeUnit.SECONDS);
 	}
 

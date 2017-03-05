@@ -201,7 +201,7 @@ public class ClayBuster extends ProjectorTrainingExerciseBase implements Trainin
 
 	@Override
 	public ExerciseMetadata getInfo() {
-		return new ExerciseMetadata("Clay Buster", "1.0", "phrack",
+		return new ExerciseMetadata("Clay Buster", "1.1", "phrack",
 				String.format("This exercise randomly launches a clay left or right at "
 						+ "slightly varying velocities every %d seconds.", CLAY_LAUNCH_DELAY));
 	}
